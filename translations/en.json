@@ -1,0 +1,4 @@
+{
+  "usage": "Usage: {file_name} {flags}",
+  "t_not_found_data": "Missing variable from translation {var} ({phrase})"
+}
