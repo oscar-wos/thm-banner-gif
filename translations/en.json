@@ -11,6 +11,5 @@
   "launching_html": "Launching pyppeteer",
   "fetching_html": "Fetching {path}",
   "generating_screenshots": "Generating screenshots",
-  "generating_gif": "Generating gif",
-  "congratulations": "{path}"
+  "generating_gif": "Generating gif"
 }
