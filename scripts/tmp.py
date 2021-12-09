@@ -3,54 +3,55 @@ import os
 
 class Tmp():
     def __init__(self, path='./tmp/'):
-        self._path = path
-        self._path_full = os.path.join(os.path.split(__file__)[0], self._path)
-        self.delete(self.path_full)
+        self._path = os.path.join(os.path.split(__file__)[0], path)
+        self.delete(self._path)
 
-    def delete(self, path):
-        if not os.path.exists(path):
-            return
-
-        if os.path.isdir(path):
-            with os.scandir(path) as it:
-                for item in it:
-                    self.delete(item.path)
-
-            os.rmdir(path)
-
-        else:
-            os.unlink(path)
-
-    def create(self, path):
+    def __create(self, path):
         try:
             os.mkdir(path)
+            return True
 
         except BaseException:
             return None
 
-        return path
-
-    def generate(self, directory_list=[]):
+    def delete(self, path):
         """
-        Usage: _tmp.generate(['html', 'html/img', 'screenshots'])
+        Usage: _tmp.delete('./tmp/')
 
-        :directory_list array:
-        @return array[string, None]
+        :path string:
+        @return None
         """
 
-        list = [os.path.join(self.path_full, item) for item in directory_list]
-        list.insert(0, self.path_full)
+        try:
+            path = os.path.abspath(path)
+
+            if os.path.isdir(path):
+                with os.scandir(path) as scanner:
+                    [self.delete(i) for i in scanner]
+
+                os.rmdir(path)
+
+            else:
+                os.unlink(path)
+
+        except BaseException:
+            return None
+
+    def dir(self, dirs=[]):
+        """
+        Usage: _tmp.dir(['html', 'html/img', 'screenshots'])
+
+        :dirs list: optional
+        @return list[string, None]
+        """
+
+        list = [os.path.join(self._path, i) for i in dirs]
+        list.insert(0, self._path)
 
         for i, dir in enumerate(list):
-            list[i] = list[i] if self.create(dir) else None
+            list[i] = list[i] if self.__create(dir) else None
 
-    @property
-    def path(self):
-        return self._path
-
-    @property
-    def path_full(self):
-        return self._path_full
+        return list
 
 
 _tmp = Tmp()

@@ -1,4 +1,16 @@
 {
+  "success": "Success\n",
   "usage": "Usage: {file_name} {flags}",
-  "t_not_found_data": "Missing variable from translation {var} ({phrase})"
+  "missing_flag": "Missing flag {flag}",
+  "missing_data": "Missing data from --url",
+  "fetching_data": "Fetching {url}",
+  "searching_data": "Searching data",
+  "decoding_data": "Decoding data",
+  "greping_data": "Grep 'ing data",
+  "generating_data": "Generating {path}",
+  "launching_html": "Launching pyppeteer",
+  "fetching_html": "Fetching {path}",
+  "generating_screenshots": "Generating screenshots",
+  "generating_gif": "Generating gif",
+  "congratulations": "{path}"
 }
